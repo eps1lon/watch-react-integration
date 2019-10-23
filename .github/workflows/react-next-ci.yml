@@ -16,8 +16,6 @@ jobs:
           version=$(npm dist-tag ls react | grep -oP 'next: \K(.*)')
           cd material-ui
           echo $version
-          echo $VERSION
-          echo $(version)
           yarn
       - name: JSDOM tests
         run: |
