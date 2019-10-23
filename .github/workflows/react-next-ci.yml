@@ -14,7 +14,8 @@ jobs:
       - name: Apply Version
         run: |
           version=$(npm dist-tag ls react | grep -oP 'next: \K(.*)')
-          node apply-version $version
+          # Laugh at me all day but bash scripts are laughable at this kind of thing
+          node -p "console.log(${version})"
           cd material-ui
           yarn
       - name: JSDOM tests
