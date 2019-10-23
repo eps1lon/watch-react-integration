@@ -1,0 +1,29 @@
+name: Test react@next integration
+# This workflow is triggered on pushes to the repository.
+on: [repository_dispatch]
+
+jobs:
+  test:
+    name: Test
+    # This job runs on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Material-UI repository
+        run: |
+          git clone git@github.com:mui-org/material-ui.git
+          git remote add upstream https://github.com/mui-org/material-ui.git
+      - name: Get react@next version
+        bash: |
+          version=$(npm dist-tag ls react | grep -oP 'next: \K(.*)')
+          echo "##vso[task.setvariable variable=ReactVersion]$version"
+      - name: Apply Version
+        run: |
+          cd material-ui
+          git checkout -b $(ReactVersion)
+          yarn
+      - name: JSDOM tests
+        run: |
+          yarn test:unit
+      - name: browser tests
+        run: |
+          yarn test:karma
