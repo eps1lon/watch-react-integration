@@ -21,7 +21,9 @@ jobs:
           yarn
       - name: JSDOM tests
         run: |
+          cd material-ui
           yarn test:unit
       - name: browser tests
         run: |
+          cd material-ui
           yarn test:karma
