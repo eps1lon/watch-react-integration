@@ -15,7 +15,7 @@ jobs:
         run: |
           version=$(npm dist-tag ls react | grep -oP 'next: \K(.*)')
           # Laugh at me all day but bash scripts are laughable at this kind of thing
-          node -p "JSON.stringify((global.package=require('./material-ui/package.json'),['react','react-dom','react-is','react-test-renderer','scheduler'].reduce((a,b)=>(a.resolutions[b]='${version}',a),global.package)),null,2)"
+          node -p "JSON.stringify((global.package=require('./material-ui/package.json'),['react','react-dom','react-is','react-test-renderer','scheduler'].reduce((a,b)=>(a.resolutions[b]='${version}',a),global.package)),null,2)" > material-ui/package.json
           cd material-ui
           yarn
       - name: JSDOM tests
