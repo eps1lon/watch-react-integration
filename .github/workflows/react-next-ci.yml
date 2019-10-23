@@ -10,8 +10,7 @@ jobs:
     steps:
       - name: Setup Material-UI repository
         run: |
-          git clone git@github.com:mui-org/material-ui.git
-          git remote add upstream https://github.com/mui-org/material-ui.git
+          git clone https://github.com/mui-org/material-ui.git
       - name: Apply Version
         run: |
           version=$(npm dist-tag ls react | grep -oP 'next: \K(.*)')
